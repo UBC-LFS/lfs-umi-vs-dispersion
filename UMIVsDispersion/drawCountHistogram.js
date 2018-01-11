@@ -11,7 +11,6 @@ const expandCount = count => {
 }
 
 const drawCountHistogram = count => {
-  console.log('hi')
   const w = 300
   const h = 150
   const width = w - margin.left - margin.right

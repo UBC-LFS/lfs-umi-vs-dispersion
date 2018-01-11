@@ -25,6 +25,7 @@ const initUMIVsDispersion = () => {
   const UMI = ['UMI1', 'UMI2', 'UMI3', 'UMI4', 'UMI5', 'UMI6']
   const elements = [yearSelect, termSelect, umiSelect, belowMinSelect]
 
+  options.years.unshift('all')
   options.depts.unshift('all')
   options.terms.unshift('all')
 
@@ -40,10 +41,18 @@ const initUMIVsDispersion = () => {
 
   refreshPicker()
 
-  attachGraph(data)
-
+  const filterData = data => data
+  .filter(x => x.dept === 'FNH')
+  .filter(x => yearSelect.value === 'all' ? true : x.year === Number(yearSelect.value))
+  .filter(x => termSelect.value === 'all' ? true : termSelect.value === x.term)
+  .filter(x => belowMinSelect.value === 'true' ? x.meetsMin : true)
+  
+  attachGraph(filterData(data))
+  
   elements.map(el => el.addEventListener('change', function () {
-    attachGraph(data, umiSelect.value)
+    console.log(belowMinSelect.value)
+
+    attachGraph(filterData(data), umiSelect.value)
   }))
 }
 
