@@ -12,33 +12,28 @@ const attachGraph = (data, umi = 'UMI6') => {
 const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
 const refreshPicker = () => {
-  $('#umiVsDispersionDept').selectpicker('refresh')
   $('#umiVsDispersionYear').selectpicker('refresh')
   $('#umiVsDispersionTerm').selectpicker('refresh')
   $('#umiVsDispersionUMI').selectpicker('refresh')
 }
 
 const initUMIVsDispersion = () => {
-  const deptSelect = document.getElementById('umiVsDispersionDept')
   const yearSelect = document.getElementById('umiVsDispersionYear')
   const termSelect = document.getElementById('umiVsDispersionTerm')
   const umiSelect = document.getElementById('umiVsDispersionUMI')
   const belowMinSelect = document.getElementById('umiVsDispersionBelowMin')
   const UMI = ['UMI1', 'UMI2', 'UMI3', 'UMI4', 'UMI5', 'UMI6']
-  const elements = [deptSelect, yearSelect, termSelect, umiSelect, belowMinSelect]
+  const elements = [yearSelect, termSelect, umiSelect, belowMinSelect]
 
   options.depts.unshift('all')
   options.terms.unshift('all')
 
-  deptSelect.value = options.depts[0]
   umiSelect.value = 'UMI6'
 
-  deptSelect.innerHTML = attachOptions(options.depts)
   yearSelect.innerHTML = attachOptions(options.years)
   termSelect.innerHTML = attachOptions(options.terms)
   umiSelect.innerHTML = attachOptions(UMI)
 
-  $('#umiVsDispersionDept').selectpicker('val', options.depts[0])
   $('#umiVsDispersionYear').selectpicker('val', options.years[options.years.length - 1])
   $('#umiVsDispersionTerm').selectpicker('val', options.terms[0])
   $('#umiVsDispersionUMI').selectpicker('val', 'UMI6')
