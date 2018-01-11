@@ -1,0 +1,23 @@
+{
+  "name": "lfs-umi-vs-dispersion",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UBC-LFS/lfs-umi-vs-dispersion.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UBC-LFS/lfs-umi-vs-dispersion/issues"
+  },
+  "homepage": "https://github.com/UBC-LFS/lfs-umi-vs-dispersion#readme",
+  "dependencies": {
+    "d3": "^4.12.2",
+    "d3-tip": "^0.7.1"
+  }
+}
