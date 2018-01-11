@@ -42,16 +42,14 @@ const initUMIVsDispersion = () => {
   refreshPicker()
 
   const filterData = data => data
-  .filter(x => x.dept === 'FNH')
-  .filter(x => yearSelect.value === 'all' ? true : x.year === Number(yearSelect.value))
-  .filter(x => termSelect.value === 'all' ? true : termSelect.value === x.term)
-  .filter(x => belowMinSelect.value === 'true' ? x.meetsMin : true)
-  
-  attachGraph(filterData(data))
-  
-  elements.map(el => el.addEventListener('change', function () {
-    console.log(belowMinSelect.value)
+    .filter(x => x.dept === 'FNH')
+    .filter(x => yearSelect.value === 'all' ? true : x.year === Number(yearSelect.value))
+    .filter(x => termSelect.value === 'all' ? true : termSelect.value === x.term)
+    .filter(x => belowMinSelect.value === 'true' ? x.meetsMin : true)
 
+  attachGraph(filterData(data))
+
+  elements.map(el => el.addEventListener('change', function () {
     attachGraph(filterData(data), umiSelect.value)
   }))
 }
