@@ -1,3 +1,5 @@
+const drawCountHistograms = require('./UMIVsDispersion/drawCountHistograms')
+
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('hello')
+  drawCountHistograms()
 })
