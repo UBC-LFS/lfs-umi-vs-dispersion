@@ -1,5 +1,6 @@
 /* global $ */
 import UMIvsDispersionController from './UMIVsDispersion/UMIvsDispersionController'
+import UMITrendController from './UMITrend/UMITrendController'
 
 document.addEventListener('DOMContentLoaded', function () {
   $('.selectpicker').selectpicker()
@@ -8,4 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
   })
 
   UMIvsDispersionController()
+
+  UMITrendController()
 })
