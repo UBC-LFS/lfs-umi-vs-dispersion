@@ -26,7 +26,7 @@ const initUMIVsDispersion = () => {
   const umiSelect = document.getElementById('umiVsDispersionUMI')
   const belowMinSelect = document.getElementById('umiVsDispersionBelowMin')
   const UMI = ['UMI1', 'UMI2', 'UMI3', 'UMI4', 'UMI5', 'UMI6']
-  const elements = [yearSelect, termSelect, umiSelect, belowMinSelect]
+  const elements = [yearSelect, termSelect]
 
   options.years.unshift('all')
   options.depts.unshift('all')
@@ -41,6 +41,8 @@ const initUMIVsDispersion = () => {
   $('#umiVsDispersionYear').selectpicker('val', options.years[options.years.length - 1])
   $('#umiVsDispersionTerm').selectpicker('val', options.terms[0])
   $('#umiVsDispersionUMI').selectpicker('val', 'UMI6')
+  $('#umiVsDispersionBelowMin').selectpicker('val', 'false')
+  $('#umiVsDispersionBelowMin').selectpicker('refresh')
 
   const filterData = data => data
     .filter(x => yearSelect.value === 'all' ? true : x.year === Number(yearSelect.value))
@@ -65,6 +67,20 @@ const initUMIVsDispersion = () => {
     refreshPicker()
     attachGraph(filteredData, umiSelect.value)
   }))
+
+  umiSelect.addEventListener('change', function () {
+    const filteredData = filterData(data)
+      .filter(x => instructorSelect.value === 'all' ? true : x.instructorName === instructorSelect.value)
+    refreshPicker()
+    attachGraph(filteredData, umiSelect.value)
+  })
+  
+  belowMinSelect.addEventListener('change', function () {
+    const filteredData = filterData(data)
+      .filter(x => instructorSelect.value === 'all' ? true : x.instructorName === instructorSelect.value)
+    refreshPicker()
+    attachGraph(filteredData, umiSelect.value)
+  })
 
   instructorSelect.addEventListener('change', function () {
     const filteredData = filterData(data)

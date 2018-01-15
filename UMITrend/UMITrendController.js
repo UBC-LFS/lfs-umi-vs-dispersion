@@ -36,8 +36,9 @@ const UMITrendController = () => {
 
   const belowMinimum = document.getElementById('umiTrendBelowMin')
   $('#umiTrendInstructor').selectpicker('val', instructorNames(data)[0])
+  $('#umiTrendBelowMin').selectpicker('val', 'false')
 
-  umiChart = drawChart(data.filter(x => x.meetsMin), instructorSelect.value)
+  umiChart = drawChart(data.filter(x => belowMinimum.value === 'false' ? true : x.meetsMin), instructorSelect.value)
   refreshPicker()
   instructorSelect.addEventListener('change', function () {
     refreshPicker()
