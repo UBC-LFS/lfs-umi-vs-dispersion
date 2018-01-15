@@ -59,7 +59,6 @@ const initUMIVsDispersion = () => {
 
   elements.map(el => el.addEventListener('change', function () {
     const filteredData = filterData(data)
-      .filter(x => instructorSelect.value === 'all' ? true : x.instructorName === instructorSelect.value)
     const instructorNames = R.uniq(filteredData.map(filterData => filterData.instructorName)).sort()
     instructorNames.unshift('all')
     instructorSelect.innerHTML = attachOptions(instructorNames)
