@@ -34,35 +34,45 @@ const initUMIVsDispersion = () => {
 
   umiSelect.value = 'UMI6'
 
-  console.log(R.uniq(data.map(sections => sections.instructorName)).sort())
-
-  const instructorNames = R.uniq(data.map(sections => sections.instructorName)).sort()
-
-  instructorNames.unshift('all')
-
-  instructorSelect.innerHTML = attachOptions(instructorNames)
   yearSelect.innerHTML = attachOptions(options.years)
   termSelect.innerHTML = attachOptions(options.terms)
   umiSelect.innerHTML = attachOptions(UMI)
 
-  $('#umiVsDispersionInstructor').selectpicker('val', instructorNames[0])
   $('#umiVsDispersionYear').selectpicker('val', options.years[options.years.length - 1])
   $('#umiVsDispersionTerm').selectpicker('val', options.terms[0])
   $('#umiVsDispersionUMI').selectpicker('val', 'UMI6')
 
-  refreshPicker()
-
   const filterData = data => data
-    .filter(x => instructorSelect.value === 'all' ? true : x.instructorName === instructorSelect.value)
     .filter(x => yearSelect.value === 'all' ? true : x.year === Number(yearSelect.value))
     .filter(x => termSelect.value === 'all' ? true : termSelect.value === x.term)
     .filter(x => belowMinSelect.value === 'true' ? x.meetsMin : true)
 
+  const filteredData = filterData(data)
+
+  const instructorNames = R.uniq(filteredData.map(filterData => filterData.instructorName)).sort()
+  instructorNames.unshift('all')
+  instructorSelect.innerHTML = attachOptions(instructorNames)
+
+  $('#umiVsDispersionInstructor').selectpicker('val', instructorNames[0])
+  refreshPicker()
   attachGraph(filterData(data))
 
   elements.map(el => el.addEventListener('change', function () {
-    attachGraph(filterData(data), umiSelect.value)
+    const filteredData = filterData(data)
+      .filter(x => instructorSelect.value === 'all' ? true : x.instructorName === instructorSelect.value)
+    const instructorNames = R.uniq(filteredData.map(filterData => filterData.instructorName)).sort()
+    instructorNames.unshift('all')
+    instructorSelect.innerHTML = attachOptions(instructorNames)
+    refreshPicker()
+    attachGraph(filteredData, umiSelect.value)
   }))
+
+  instructorSelect.addEventListener('change', function () {
+    const filteredData = filterData(data)
+      .filter(x => instructorSelect.value === 'all' ? true : x.instructorName === instructorSelect.value)
+    refreshPicker()
+    attachGraph(filteredData, umiSelect.value)
+  })
 }
 
 export default initUMIVsDispersion

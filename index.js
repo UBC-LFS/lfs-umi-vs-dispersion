@@ -10,5 +10,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
   UMIvsDispersionController()
 
-  UMITrendController()
+  // UMITrendController()
 })
