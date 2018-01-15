@@ -18,6 +18,12 @@ const destroyChart = () => {
   }
 }
 
+const refreshPicker = () => {
+  $('#umiTrendInstructor').selectpicker('refresh')
+  $('#umiTrendUMI').selectpicker('refresh')
+  $('#umiTrendBelowMin').selectpicker('refresh')
+}
+
 const UMITrendController = () => {
   const UMI = ['UMI1', 'UMI2', 'UMI3', 'UMI4', 'UMI5', 'UMI6']
 
@@ -28,24 +34,42 @@ const UMITrendController = () => {
   umiSelect.innerHTML = attachOptions(UMI)
   umiSelect.value = 'UMI6'
 
+  const belowMinimum = document.getElementById('umiTrendBelowMin')
   $('#umiTrendInstructor').selectpicker('val', instructorNames(data)[0])
-  $('#umiTrendInstructor').selectpicker('refresh')
-  $('#umiTrendUMI').selectpicker('refresh')
 
-  umiChart = drawChart(data, instructorSelect.value)
-
+  umiChart = drawChart(data.filter(x => x.meetsMin), instructorSelect.value)
+  refreshPicker()
   instructorSelect.addEventListener('change', function () {
+    refreshPicker()
     destroyChart()
-    umiChart = drawChart(data, instructorSelect.value)
+    umiChart = drawChart(data.filter(x => belowMinimum.value === 'false' ? true : x.meetsMin), instructorSelect.value, umiSelect.value)
+  })
+
+  umiSelect.addEventListener('change', function () {
+    refreshPicker()
+    destroyChart()
+    umiChart = drawChart(data.filter(x => belowMinimum.value === 'false' ? true : x.meetsMin),
+      instructorSelect.value,
+      umiSelect.value)
+  })
+
+  belowMinimum.addEventListener('change', function () {
+    refreshPicker()
+    destroyChart()
+    umiChart = drawChart(
+      data.filter(x => belowMinimum.value === 'false' ? true : x.meetsMin),
+      instructorSelect.value,
+      umiSelect.value
+    )
   })
 }
 
-const drawChart = (data, instructorName) => {
+const drawChart = (data, instructorName, UMI = 'UMI6') => {
   const instructorData = data.filter(section => section.instructorName === instructorName)
   const sortedByTerm = sortByTerm(instructorData)
 
   const datasets = () => {
-    const sortedData = sortedByTerm.map(x => x.UMI6.average).slice(-15)
+    const sortedData = sortedByTerm.map(x => x[UMI].average).slice(-15)
 
     return {
       pointRadius: 5,
