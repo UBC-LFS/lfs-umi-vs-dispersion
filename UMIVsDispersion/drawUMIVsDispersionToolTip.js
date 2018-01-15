@@ -12,9 +12,10 @@ const drawUMIVsDispersionToolTip = UMI => d3.tip().html(d => {
   console.log(d)
   return "<div class='d3ToolTip'>" +
     '<h3 style="text-align:center;"> ' + d.instructorName + '</h3>' +
-    '<p>Course: ' + d.course + ' ' + d.section + '</p>' +
-    '<p>Question Code: ' + UMI + ' "' + qd[UMI] +
+    '<p>' + UMI + ' "' + qd[UMI] +
     '"' + '</p>' +
+    '<p>Period: ' + d.year + d.term + '</p>' +
+    '<p>Course: ' + d.course + ' ' + d.section + '</p>' +
     '<p>Average: ' + d[UMI].average + '</p>' +
     '<p>Dispersion Index: ' + d[UMI].dispersionIndex + '</p>' +
     '<p>Class Size: ' + d.enrolment + '</p>' +
