@@ -35,6 +35,18 @@
         </div>
       </div>
     </div>
+    <div class="card">
+      <div class="card-block">
+          <h2>UMI Trend Lines</h2>
+          <select class="selectpicker" id="umiTrendInstructor" data-live-search="true"></select>
+          <select class="selectpicker" id="umiTrendUMI" data-live-search="true"></select>
+          <select class="selectpicker" id="umiTrendBelowMin" data-live-search="true">
+              <option value="true">Remove Below Minimum</option>
+              <option value="false">Don't Remove Below Minimum</option>
+            </select>
+          <canvas id="umiTrendChart"></canvas>
+      </div>
+    </div>
     <h3>Visualization Summary</h3>
     <p>Each circle in the above visualization represents a section offered in the selected year/term. Each circle is plotted
       by its UMI rating on the Y-axis and Dispersion Index on the X-axis.</p>
@@ -127,13 +139,6 @@
     </table>
 
 
-    <div class="card">
-      <div class="card-block">
-          <select class="selectpicker" id="umiTrendInstructor" data-live-search="true"></select>
-          <select class="selectpicker" id="umiTrendUMI" data-live-search="true"></select>
-          <canvas id="myChart" width="1400" height="1000"></canvas>
-      </div>
-    </div>
   </div>
 </body>
 
